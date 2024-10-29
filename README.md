@@ -110,7 +110,7 @@ You can also evaluate on multiple tasks by adding more task names to the `--task
 separated by a comma.
 
 ```bash
---task_names Language-v1, Keyword-v1, Audience-v1
+--task_names Language-v1, Clarity-v1, Audience-v1
 ```
 
 ### Reranker Usage
