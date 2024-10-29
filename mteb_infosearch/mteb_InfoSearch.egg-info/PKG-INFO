@@ -1,0 +1,25 @@
+Metadata-Version: 2.1
+Name: mteb_InfoSearch
+Version: 0.1.0
+Summary: Evaluating instruction following in retrieval models.
+Home-page: https://github.com/EIT-NLP/InfoSearch
+Author: EIT-NLP
+Author-email: --
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.8
+Requires-Dist: datasets==2.20.0
+Requires-Dist: numpy==1.26.4
+Requires-Dist: pandas==2.2.3
+Requires-Dist: pydantic==2.9.2
+Requires-Dist: pytrec_eval==0.5
+Requires-Dist: pytrec_eval_terrier==0.5.6
+Requires-Dist: Requests==2.32.3
+Requires-Dist: rich==13.9.2
+Requires-Dist: scikit_learn==1.5.2
+Requires-Dist: scipy==1.14.1
+Requires-Dist: sentence_transformers==2.7.0
+Requires-Dist: torch==2.4.0
+Requires-Dist: tqdm==4.66.4
+Requires-Dist: typing_extensions==4.12.2
