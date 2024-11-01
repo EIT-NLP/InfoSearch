@@ -133,6 +133,14 @@ It will take a while to evaluate a model on each task.
 If you found the code, data or model useful, free to cite:
 
 ```bibtex
-
+@misc{zhou2024contentrelevanceevaluatinginstruction,
+      title={Beyond Content Relevance: Evaluating Instruction Following in Retrieval Models}, 
+      author={Jianqun Zhou and Yuanlei Zheng and Wei Chen and Qianqian Zheng and Zeyuan Shang and Wei Zhang and Rui Meng and Xiaoyu Shen},
+      year={2024},
+      eprint={2410.23841},
+      archivePrefix={arXiv},
+      primaryClass={cs.IR},
+      url={https://arxiv.org/abs/2410.23841}, 
+}
 ```
 
