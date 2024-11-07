@@ -1,4 +1,4 @@
-<h1 align="center">InfoSearch--Beyond Content Relevance: Evaluating Instruction Following in Retrieval Models</b></h1>
+<h1 align="center"><b>InfoSearch--Beyond Content Relevance: Evaluating Instruction Following in Retrieval Models</b></h1>
 
 <h4 align="center">
     <p>
@@ -6,13 +6,72 @@
         <a href="#installation">Installation</a> |
         <a href="#usage">Usage</a> |
         <a href="#citing">Citing</a> |
-    <p>
+    </p>
 </h4>
 
 Official repository for the paper [Beyond Content Relevance: Evaluating Instruction Following in Retrieval Models]().
 
+## Overview
+
+### Dataset Construction
+
+We construct a dataset that contains 6 dimensions by consciously integrating conditions when filtering Q-A pairs from
+existing datasets or web pages.
+
+![Dataset Construction](images/dataset_construction.png)
+
+### Retrieval Modes
+
+![Retrieval Modes](images/retrieval_modes.png)
+In order to better detect the instruction-following capabilities of retrieval models, we introduce three retrieval
+modes.
+
+- **Original Mode**: This mode serves as a baseline that evaluates the model’s basic retrieval ability to find pertinent
+  information without any specific constraints.
+- **Instructed Mode**: In this mode, the model is required to find documents that are content relevant and satisfy the
+  condition specified in the instruction.
+- **Reversely Mode**: In this mode, the model is required to find documents that are content relevant and do \emph{not}
+  satisfy the condition specified in the instruction, which tests the model's ability to understand negation.
+
+### Evaluation Metrics
+
+We define two novel metrics to quantify the model's responsiveness to instructions: Strict Instruction Compliance Ratio(
+**SICR**) and Weighted Instruction Sensitivity Evaluation(**WISE**).
+- **SICR:**
+<p align="center">
+  <img src="images/SICR.png" alt="SICR" width="80%" />
+</p>
+
+- **WISE:**
+<p align="center">
+  <img src="images/F.png" alt="F" width="30%" />
+  <img src="images/reward.png" alt="reward" width="30%" />
+  <img src="images/penalty.png" alt="penalty" width="30%" />
+</p>
+<p align="center">
+  <img src="images/WISE.png" alt="WISE" width="80%" />
+</p>
+
+### Results
+
+Radar plots comparing the WISE scores of various models across different dimensions (the left is retrieval models, and
+the right is reranking models),
+highlighting the strengths and weaknesses of each model in handling different types of instructions.
+Among retrieval models, GritLM demonstrates the strongest instruction-following capability, while GPT-4 consistently
+performs the best across all dimensions in the reranking category.
+<p align="center">
+  <img src="images/WISe_retrieval.png" alt="WISe_retrieval" width="45%" />
+  <img src="images/WISe_rerank.png" alt="WISe_rerank" width="45%" />
+</p>
+
+Performance comparison of different retrieval models averaged over six dimensions.
+![Average Scores of Multiple Models](images/avg_result.png)
+
 ## Links
-- The evaluation code leverages the scripts provided by the [FollowIR](https://github.com/orionw/FollowIR) framework, which offer robust tools for assessing instruction-following capabilities.
+
+- The evaluation code leverages the scripts provided by the [FollowIR](https://github.com/orionw/FollowIR) framework,
+  which offer robust tools for assessing instruction-following capabilities.
+
 ### Test Datasets
 
 | Dimension                                                           | Description                                                                    |
