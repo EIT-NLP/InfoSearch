@@ -9,7 +9,7 @@
     </p>
 </h4>
 
-Official repository for the paper [Beyond Content Relevance: Evaluating Instruction Following in Retrieval Models]().
+Official repository for the paper [Beyond Content Relevance: Evaluating Instruction Following in Retrieval Models](https://arxiv.org/abs/2410.23841).
 
 ## Overview
 
