@@ -89,37 +89,6 @@ Performance comparison of different retrieval models averaged over six dimension
 |:---------------------|:----------------------------------------------|
 | [InfoSearch-train]() | We design a train dataset to fine-tune models |
 
-### Model Fine-tuning
-
-We use `LLaMa-Factory` to fine-tune FollowIR-7B to create InfoSearch-7B , after transforming it to fit their format (
-input of "query" + "instruction" inside the template, output is the label, and instruction as the beginning of the
-template) with the following training script:
-
-```bash
-#!/bin/bash
-CUDA_VISIBLE_DEVICES=0 llamafactory-cli train \
-    --stage sft \
-    --do_train \
-    --model_name_or_path "jhu-clsp/FollowIR-7B" \
-    --dataset InfoSearch-train \
-    --template mistral \
-    --output_dir InfoSearch-finetune \
-    --finetuning_type lora \
-    --lora_target q_proj,v_proj,o_proj,k_proj \
-    --overwrite_cache \
-    --per_device_train_batch_size 32 \
-    --gradient_accumulation_steps 1 \
-    --lr_scheduler_type cosine \
-    --logging_steps 2 \
-    --save_steps 25 \
-    --learning_rate 3e-5 \
-    --num_train_epochs 8.0 \
-    --max_length 2048 \
-    --lora_rank 8 \
-    --lora_alpha 16 \
-    --plot_loss \
-    --bf16
-```
 
 ## Installation
 
