@@ -9,7 +9,24 @@
     </p>
 </h4>
 
-Official repository for the paper [Beyond Content Relevance: Evaluating Instruction Following in Retrieval Models](https://arxiv.org/abs/2410.23841).
+Official repository for the
+paper [Beyond Content Relevance: Evaluating Instruction Following in Retrieval Models](https://arxiv.org/abs/2410.23841).
+
+## Abstract
+
+Instruction-following capabilities in large language models (LLMs) have significantly progressed, enabling more complex
+user interactions through detailed prompts. However, retrieval systems have not matched these advances, most of them
+still relies on traditional lexical and semantic matching techniques that fail to fully capture user intent. Recent
+efforts have introduced instruction-aware retrieval models, but these primarily focus on intrinsic content relevance,
+which neglects the importance of customized preferences for broader document-level attributes. This study evaluates the
+instruction-following capabilities of various retrieval models beyond content relevance, including LLM-based dense
+retrieval and reranking models. We develop **InfoSearch**, a novel retrieval evaluation benchmark spanning
+six document-level attributes: **Audience**, **Keyword**, **Format**, **Language**, **Length**, and
+**Source**, and introduce novel metrics -- Strict Instruction Compliance Ratio (SICR) and Weighted Instruction
+Sensitivity Evaluation (WISE) to accurately assess the models' responsiveness to instructions. Our findings reveal that
+while reranking models generally surpass retrieval models in instruction following, they still face challenges in
+handling certain attributes. Moreover, although instruction fine-tuning and increased model size lead to better
+performance, most models fall short of achieving comprehensive instruction compliance as assessed by our benchmark.
 
 ## Overview
 
@@ -37,12 +54,15 @@ modes.
 
 We define two novel metrics to quantify the model's responsiveness to instructions: Strict Instruction Compliance Ratio(
 **SICR**) and Weighted Instruction Sensitivity Evaluation(**WISE**).
+
 - **SICR:**
+
 <p align="center">
   <img src="images/SICR.png" alt="SICR" width="80%" />
 </p>
 
 - **WISE:**
+
 <p align="center">
   <img src="images/F.png" alt="F" width="30%" />
   <img src="images/reward.png" alt="reward" width="30%" />
@@ -88,7 +108,6 @@ Performance comparison of different retrieval models averaged over six dimension
 | Dataset              | Description                                   |
 |:---------------------|:----------------------------------------------|
 | [InfoSearch-train]() | We design a train dataset to fine-tune models |
-
 
 ## Installation
 
