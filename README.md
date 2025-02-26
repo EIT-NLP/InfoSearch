@@ -160,7 +160,7 @@ separated by a comma.
 --task_names Language-v1, Clarity-v1, Audience-v1
 ```
 
-### Reranker Usage
+### Point-wise Rerank Usage
 
 If you want to evaluate with your own reranker model, you need to add your model to MODEL_DICT in `reranker_models.py`
 and then run the following command:
@@ -174,6 +174,75 @@ CUDA_VISIBLE_DEVICES=0 python models/rerankers/evaluate_reranker.py \
 ```
 
 It will take a while to evaluate a model on each task.
+
+### List-wise Rerank Usage
+[RankLLM](https://github.com/castorini/rank_llm) provides useful tools for list-wise reranking.
+
+```bash
+git clone https://github.com/castorini/rank_llm.git
+cd rank_llm
+conda create -n rankllm python=3.10 -y
+conda activate rankllm
+pip install -r requirements.txt
+```
+
+We provide a script to rerank retrieval results and retrieval results based on `e5-mistral` under the `listwise` directory. 
+If you want to rerank retrieval results, you need to put the retrieval results in the `rank_llm/src/rankllm/dimension` directory and 
+put the `rerank.py` script in the `rank_llm/src/rankllm` directory.
+
+```plaintext
+rank_llm/
+├── src/
+│   ├── rankllm/
+│   │   ├── ...
+│   │   ├── dimension
+│   │   │   ├── Audience-v1_ch_retrieval_results.json
+│   │   │   ├── ...
+│   │   ├── ...
+│   │   ├── rerank.py
+│   │   ├── ...
+├── ...
+```
+
+If you want to rerank your own retrieval results, please make sure the retrieval results are in the following format:
+```json
+[
+  {
+    "query": {
+      "text": "Do Walnuts Really Improve Artery Function?",
+      "qid": "0"
+    },
+    "candidates": [
+      {
+        "docid": "0",
+        "score": 1.0,
+        "doc": {
+          "content": "Walnuts, like other nuts, have been found to have potential benefits for..."
+        }
+      },
+      {
+        "docid": "1",
+        "score": 0.5,
+        "doc": {
+          "content": "The consumption of nuts, such as almonds and pistachios, has been linked to numerous health benefits..."
+        }
+      },
+      ...
+    ]
+  },
+  ...
+]
+```
+
+Example usage of the list-wise reranker:
+```bash
+# Make sure the current directory is rank_llm/src
+CUDA_VISIBLE_DEVICES=0 python -m rank_llm.rerank.py \
+--model_path /path/to/your/model \
+--dataset Language-v1 \
+--context_size 4096 \
+--top_k_candidates 100
+```
 
 ## Citing
 
