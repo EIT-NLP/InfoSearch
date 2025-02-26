@@ -1,15 +1,15 @@
 import os
 import logging
 import argparse
-from huggingface_hub import login 
+from huggingface_hub import login
 from mteb import MTEB
 
 logging.basicConfig(level=logging.INFO)
-from reranker_models import * 
+from reranker_models import *
 
 
 logger = logging.getLogger("main")
-login("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")
+
 # "meta-llama/Llama-2-7b-chat-hf", meta-llama/Meta-Llama-3.1-8B-Instruct,jhu-clsp/FollowIR-7B, mistralai/Mistral-7B-Instruct-v0.2,castorini/rank_zephyr_7b_v1_full
 
 if __name__ == "__main__":
@@ -22,7 +22,7 @@ if __name__ == "__main__":
     parser.add_argument("--task_names", default=None, type=str, nargs='+')
     args = parser.parse_args()
     print(args)
-    
+
     if args.model_name_or_path in MODEL_DICT:
         if args.model_name_or_path == "castorini/rank_zephyr_7b_v1_full":
             model = MODEL_DICT[args.model_name_or_path](args.model_name_or_path)
@@ -41,7 +41,7 @@ if __name__ == "__main__":
         eval_splits = ["dev"] if task == "MSMARCO" else ["test"]
         evaluation = MTEB(tasks=[task], task_langs=["en"], do_length_ablation=False)  # Remove "en" for running all languages
         task_name_for_scores = task.split("InstructionRetrieval")[0].lower()
-        evaluation.run(model, 
+        evaluation.run(model,
                        output_folder=args.output_dir,
                        eval_splits=eval_splits,
                        batch_size=args.batch_size,

@@ -64,6 +64,15 @@ def pool(last_hidden_states: Tensor,
             sequence_lengths = attention_mask.sum(dim=1) - 1
             batch_size = last_hidden.shape[0]
             emb = last_hidden[torch.arange(batch_size, device=last_hidden.device), sequence_lengths]
+    elif pool_type == "attention":
+        # Compute attention weights dynamically
+        query = torch.nn.Linear(last_hidden_states.size(-1), 1, bias=False).to(last_hidden.device)
+        attention_scores = query(last_hidden).squeeze(-1)  # Shape: (batch_size, seq_len)
+        attention_scores = attention_scores.masked_fill(~attention_mask.bool(), float("-inf"))
+        attention_weights = torch.softmax(attention_scores, dim=1)  # Shape: (batch_size, seq_len)
+
+        # Apply attention weights to hidden states
+        emb = torch.sum(last_hidden * attention_weights.unsqueeze(-1), dim=1)
     else:
         raise ValueError(f"pool_type {pool_type} not supported")
 

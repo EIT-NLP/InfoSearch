@@ -16,8 +16,8 @@ from transformers import (
     T5ForConditionalGeneration,
     AutoModelForCausalLM,
 )
-from fastchat.model import get_conversation_template, load_model
-from listwise import zephyr_reranker
+# from fastchat.model import get_conversation_template, load_model
+# from listwise import zephyr_reranker
 
 from mteb.evaluation.evaluators.RetrievalEvaluator import DenseRetrievalExactSearch
 # Based on https://github.com/castorini/pygaggle/blob/f54ae53d6183c1b66444fa5a0542301e0d1090f5/pygaggle/rerank/base.py#L63
@@ -92,7 +92,7 @@ class MonoT5Reranker(Reranker):
             model_name_or_path, **model_args
         )
         print(f"Using model {model_name_or_path}")
-        
+
         if 'torch_compile' in kwargs and kwargs['torch_compile']:
             self.torch_compile = kwargs["torch_compile"]
             self.model = torch.compile(self.model)
@@ -137,7 +137,7 @@ class MonoT5Reranker(Reranker):
     @torch.inference_mode()
     def predict(self, input_to_rerank, **kwargs):
         queries, passages, instructions = list(zip(*input_to_rerank))
-   
+
         if instructions is not None and instructions[0] is not None:
             # print(f"Adding instructions to monot5 queries")
             queries = [f"{q} {i}".strip() for i, q in zip(instructions, queries)]
@@ -303,26 +303,26 @@ class GritLMReranker(MistralReranker):
         self.model = grit.model
         self.tokenizer = grit.tokenizer
 
-class RankZephyrReranker(MistralReranker):
-    name: str = "RankZephyr"
-
-    def __init__(
-        self,
-        model_name_or_path: str = "castorini/rank_zephyr_7b_v1_full",
-        context_size: int = 4096,
-        device: str = "cuda",
-        **kwargs,
-    ):
-        super().__init__(model_name_or_path, **kwargs)
-        self.template = """<s>[INST] Rank the passages based on their relevance to the search query (true/false).
-                        Query: {query}
-                        Document: {text}
-                        Relevant (either "true" or "false"): [/INST]"""
-
-        # Load the model and tokenizer
-        self.model, self.tokenizer = load_model(model_name_or_path, device=device)
-        self.model.to(self.device)
-        self.model.eval()
+# class RankZephyrReranker(MistralReranker):
+#     name: str = "RankZephyr"
+#
+#     def __init__(
+#         self,
+#         model_name_or_path: str = "castorini/rank_zephyr_7b_v1_full",
+#         context_size: int = 4096,
+#         device: str = "cuda",
+#         **kwargs,
+#     ):
+#         super().__init__(model_name_or_path, **kwargs)
+#         self.template = """<s>[INST] Rank the passages based on their relevance to the search query (true/false).
+#                         Query: {query}
+#                         Document: {text}
+#                         Relevant (either "true" or "false"): [/INST]"""
+#
+#         # Load the model and tokenizer
+#         self.model, self.tokenizer = load_model(model_name_or_path, device=device)
+#         self.model.to(self.device)
+#         self.model.eval()
 
 
 class FollowIRReranker(LlamaReranker):
@@ -455,7 +455,7 @@ class TARTFullReranker(Reranker):
             truncation="only_second",
             max_length=self.max_length,
         )
-        
+
         if torch.cuda.is_available():
             features = {k: v.to("cuda") for k, v in features.items()}
         with torch.no_grad():
@@ -509,7 +509,7 @@ class RankLlamaReranker(Reranker):
             self.first_print = False
 
         self.model.eval()
-       
+
         cur_queries = [f'query: {query}' for query in queries]
         cur_passages = [f'document: {passage}' for passage in passages]
         features = self.tokenizer(
@@ -551,5 +551,6 @@ MODEL_DICT = {
     # "castorini/rankllama-v1-7b-lora-passage": RankLlamaReranker, # Not working correctly
     "jhu-clsp/FollowIR-7B": FollowIRReranker,
     "GritLM": GritLMReranker,
-    "castorini/rank_zephyr_7b_v1_full": zephyr_reranker.ZephyrReranker,
+    # "castorini/rank_zephyr_7b_v1_full": zephyr_reranker.ZephyrReranker,
+    "/data/zyl_data/InfoSearch/wo_language": FollowIRReranker
 }

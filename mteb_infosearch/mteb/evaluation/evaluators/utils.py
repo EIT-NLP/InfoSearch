@@ -387,11 +387,13 @@ def WISE_score(x: dict[str, float]) -> float:
         if x["ori_rank"] < x["sum_count"] and x["ins_rank"] == 1:
             return 1
         elif (x["ori_rank"] <= 20):
-            return (1 - (x["ori_rank"] - x["ins_rank"]) / 20) * (1 / math.sqrt(x["ins_rank"]))
+            return (1 - math.sqrt(x["ori_rank"] - x["ins_rank"]) / 20) * (1 / math.sqrt(x["ins_rank"]))
         elif 20 < x["ori_rank"]:
             return 0.01 
     else:
-        if x["ins_rank"] < x["ori_rank"] < x["rev_rank"]:
+        # if x["ins_rank"] < x["ori_rank"] < x["rev_rank"]:
+        #     return -1
+        if x["rev_rank"] < x["ori_rank"] < x["ins_rank"]:
             return -1
         elif x["ori_rank"] <= x["ins_rank"]:
             return ((x["ori_rank"] - x["ins_rank"]) / x["ins_rank"])
@@ -407,7 +409,7 @@ def ideal_WISE_score(x: dict[str, float]) -> float:
         if x["ori_rank"] < x["sum_count"] and x["ideal_ins_rank"] == 1:
             return 1
         elif (x["ori_rank"] <= 20):
-            return (1 - (x["ori_rank"] - x["ideal_ins_rank"]) / 20) * (1 / math.sqrt(x["ideal_ins_rank"]))
+            return (1 - math.sqrt(x["ori_rank"] - x["ideal_ins_rank"]) / 20) * (1 / math.sqrt(x["ideal_ins_rank"]))
         elif 20 < x["ori_rank"]:
             return 0.01 
         
