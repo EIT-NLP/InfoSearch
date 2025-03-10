@@ -105,9 +105,9 @@ Performance comparison of different retrieval models averaged over six dimension
 
 ### Train Dataset
 
-| Dataset              | Description                                   |
-|:---------------------|:----------------------------------------------|
-| [InfoSearch-train]() | We design a train dataset to fine-tune models |
+| Dataset                                         | Description                                   |
+|:------------------------------------------------|:----------------------------------------------|
+| [InfoSearch-train](train/InfoSearch_train.json) | We design a train dataset to fine-tune models |
 
 ## Installation
 
