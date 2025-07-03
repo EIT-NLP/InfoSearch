@@ -6,7 +6,7 @@
         <a href="#installation">Installation</a> |
         <a href="#usage">Usage</a> |
         <a href="#citing">Citing</a> |
-        <a href="https://zzzyyyll.github.io/">Leaderboard</a> |
+        <a href="https://zzzyyyll.github.io/infosearch-learderboard/">Leaderboard</a> |
     </p>
 </h4>
 
