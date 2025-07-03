@@ -13,6 +13,20 @@
 Official repository for the
 paper [Beyond Content Relevance: Evaluating Instruction Following in Retrieval Models](https://arxiv.org/abs/2410.23841).
 
+---
+
+## 🔄 Updates
+
+<div align="center">
+
+| 📅 Date | 🚀 Update | 📝 Description |
+|---------|-----------|----------------|
+| **2025-07** | ✨ **Qwen3-Embedding-8B** | Evaluated Qwen3-Embedding-8B on InfoSearch benchmark |
+
+</div>
+
+---
+
 ## Abstract
 
 Instruction-following capabilities in large language models (LLMs) have significantly progressed, enabling more complex
