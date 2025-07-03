@@ -19,9 +19,9 @@ paper [Beyond Content Relevance: Evaluating Instruction Following in Retrieval M
 
 <div align="center">
 
-| 📅 Date | 🚀 Update | 📝 Description |
-|---------|-----------|----------------|
-| **2025-07** | ✨ **Qwen3-Embedding-8B** | Evaluated Qwen3-Embedding-8B on InfoSearch benchmark |
+| 📅 Date | 🚀 Update | 📝 Description                                          |
+|---------|-----------|---------------------------------------------------------|
+| **2025-07** | ✨ **Qwen3-Embedding** | Evaluated Qwen3-Embedding-8B/4B on InfoSearch benchmark |
 
 </div>
 
